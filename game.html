@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="main.css" rel='stylesheet'>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tennis</h1>
+    <!-- setting the size of the game canvas -->
+    <canvas id='gameCanvas' width='800' height='600'> </canvas> 
+
+    <script> 
+    // info on deminsions
+        var canvas;
+    // graffical info
+        var canvasContext;
+    // position on the x axis
+        var ballX = 50;
+
+        var ballSpeedX = 5
+
+    window.onload = function () {
+        // fillRect is the position and size of the 'filled' piece (pixels from the left, the right, width, height)
+        console.log('Whoop whoop bloop bloop');
+        canvas = document.getElementById('gameCanvas')
+        canvasContext = canvas.getContext('2d')
+        var framesPerSecond = 30
+        // calling func to draw board
+        setInterval(callDrawMove, 1000/framesPerSecond);
+       
+    }
+
+    function callDrawMove() {
+        movePieces();
+        drawGame();
+    }
+
+    function movePieces() {
+        ballX = ballX + ballSpeedX
+        // stopping the ball from moving past 800px or less that 0px
+        if (ballX < 0 || ballX > canvas.width) {
+            ballSpeedX = -ballSpeedX
+        }
+    }
+
+    function drawGame () {
+        
+
+        console.log(ballX)
+        // create board
+        canvasContext.fillStyle = 'grey';
+        canvasContext.fillRect(0,0,canvas.width, canvas.height);
+        //center line
+        canvasContext.fillStyle = 'black';
+        canvasContext.fillRect(395, 295, 10, 20);
+        //rackets
+        canvasContext.fillStyle = 'aquamarine';
+        canvasContext.fillRect(5, 200, 10, 100);
+        //ball
+        canvasContext.fillStyle = 'pink';
+        canvasContext.fillRect(ballX, 220, 10, 10);
+    }
+        
+    </script>
+
+</body>
+</html>
